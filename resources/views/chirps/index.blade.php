@@ -20,6 +20,25 @@
 
                 <x-chirps.single :chirp="$chirp"/>
             @endforeach
+
+            @if($chirps->nextPageUrl())
+                <div
+                    hx-get="{{ $chirps->nextPageUrl() }}"
+                    hx-select="#chirps>div"
+                    hx-swap="outerHTML"
+                    hx-trigger="intersect"
+                >
+                    Loading more...
+                </div>
+            @endif
         </div>
+
+        <noscrip>
+            <div class="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
+                {{ $chirps->links() }}
+            </div>
+        </noscrip>
+
     </div>
+
 </x-app-layout>
