@@ -50,12 +50,16 @@
                         </x-dropdown-link>
                         <form
                             method="POST"
-                            action="{{ route('chirps.destroy', $chirp) }}">
+                            action="{{ route('chirps.destroy', $chirp) }}"
+                            hx-delete="{{route('chirps.destroy',$chirp)}}"
+                            hx-target="closest .chirp"
+                            hx-swap="delete">
                             @csrf
                             @method('delete')
                             <x-dropdown-link
-                                :href="route('chirps.destroy', $chirp)"
-                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                :component="'button'"
+                                type="submit"
+                            >
                                 {{ __('Delete') }}
                             </x-dropdown-link>
                         </form>
